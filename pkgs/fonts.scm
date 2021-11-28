@@ -2,6 +2,7 @@
   #:use-module (gnu packages fonts)
   #:use-module (guix download)
   #:use-module (guix packages)
+  #:use-module (guix licenses)
   #:use-module (guix build-system font))
 
 (define %iosevka-version "11.1.0")

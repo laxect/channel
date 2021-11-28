@@ -1,5 +1,4 @@
 (channel
  (version 0)
- (directory "pkgs")
  (url "https://github.com/laxect/channel"))
 
