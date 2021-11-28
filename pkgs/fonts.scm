@@ -1,4 +1,7 @@
-(use-modules (gnu packages fonts))
+(use-modules 
+  (guix packages)
+  (guix download)
+  (gnu packages fonts))
 
 (define font-iosevka-term-ss10
   (package
