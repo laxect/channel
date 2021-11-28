@@ -26,5 +26,5 @@
      "Iosevka is a slender monospace sans-serif or slab-serif typeface inspired
 by Pragmata Pro, M+, and PF DIN Mono, designed to be the ideal font for
 programming.  Iosevka is completely generated from its source code.")
-    (license (list license:silofl1.1    ;build artifacts (i.e., the fonts)
-                   license:bsd-3))))    ;supporting code
+    (license (list silofl1.1    ;build artifacts (i.e., the fonts)
+                   bsd-3))))    ;supporting code
