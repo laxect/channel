@@ -1,6 +1,6 @@
 (use-modules (gnu packages fonts))
 
-(define-public font-iosevka-term-ss10
+(define font-iosevka-term-ss10
   (package
     (inherit font-iosevka-term)
     (name "font-iosevka-term-ss10")
