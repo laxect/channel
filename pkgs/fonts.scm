@@ -5,7 +5,7 @@
   #:use-module (guix licenses)
   #:use-module (guix build-system font))
 
-(define %iosevka-version "11.2.1")
+(define %iosevka-version "11.2.3")
 
 (define-public font-iosevka-term-ss10
   (package
@@ -20,7 +20,7 @@
                            "/releases/download/v" version
                            "/ttf-iosevka-term-ss10-" version ".zip"))
        (sha256
-        (base32 "0rr9cdmacnnbiwcxi9jlnbqv1wsc4i5k8arr2pjkivsbq3xx5q5v"))))
+        (base32 "1pl4z1kcmlkbqxl9g70nj5jisi4889w6q92d56p86m7y35hkdxkh"))))
     (synopsis "Coders' typeface, built from code")
     (description
      "Iosevka is a slender monospace sans-serif or slab-serif typeface inspired
