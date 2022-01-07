@@ -13,14 +13,14 @@
 (define-public anki-status-0.2
   (package
     (name "anki-status")
-    (version "0.2.0")
+    (version "0.2.1")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "anki-status" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "0q4v3iil42594ckfhlgvc985kb8xdvpy9byf7rhhk9h9vclmrvqv"))))
+          (base32 "0pv9h2mv3k07dh0z17vxymbg396pn974ngxh8a1y9f8zjflgqkw6"))))
     (build-system cargo-build-system)
     (inputs (list openssl))
     (arguments
