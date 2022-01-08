@@ -33,4 +33,3 @@
     (synopsis "Anki 2.1.x status bar plugin")
     (description "Anki 2.1.x status bar plugin")
     (license license:expat)))
-
