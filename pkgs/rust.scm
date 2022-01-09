@@ -2946,14 +2946,14 @@ platform.")
 (define-public anki-status-0.2
   (package
     (name "anki-status")
-    (version "0.2.1")
+    (version "0.2.2")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri "anki-status" version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256
-          (base32 "0pv9h2mv3k07dh0z17vxymbg396pn974ngxh8a1y9f8zjflgqkw6"))))
+          (base32 "0fz35qzgx5311vmvd5xcacgmn09qf58asac6rj54dqjcp7nsk3bl"))))
     (build-system cargo-build-system)
     (inputs (list openssl))
     (arguments
