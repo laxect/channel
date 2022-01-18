@@ -25,8 +25,7 @@
     (build-system cargo-build-system)
     (inputs (list openssl))
     (arguments
-     `(#:rust ,rust-1.57
-       #:cargo-inputs
+     `(#:cargo-inputs
        (("rust-reqwest" ,rust-reqwest-0.11) ("rust-serde" ,rust-serde-1)
         ("rust-time" ,rust-time-0.3))))
     (home-page "")
