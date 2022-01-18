@@ -9,7 +9,6 @@
   #:use-module (gnu packages tls)
   #:use-module (gnu packages crates-io)
   #:use-module (gnu packages crates-graphics)
-  #:use-module (pkgs crates)
   #:use-module (gnu packages rust))
 
 (define-public anki-status-0.2
