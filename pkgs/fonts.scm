@@ -1,11 +1,17 @@
-(define-module (pkgs fonts)
-  #:use-module (gnu packages fonts)
-  #:use-module (guix download)
-  #:use-module (guix packages)
-  #:use-module (guix licenses)
-  #:use-module (guix build-system font))
+(define-module
+  (pkgs fonts)
+  #:use-module
+  (gnu packages fonts)
+  #:use-module
+  (guix download)
+  #:use-module
+  (guix packages)
+  #:use-module
+  (guix licenses)
+  #:use-module
+  (guix build-system font))
 
-(define %iosevka-version "11.2.3")
+(define %iosevka-version "15.2.0")
 
 (define-public font-iosevka-term-ss10
   (package
@@ -14,17 +20,20 @@
     (build-system font-build-system)
     (home-page "https://be5invis.github.io/Iosevka/")
     (source
-     (origin
-       (method url-fetch/zipbomb)
-       (uri (string-append "https://github.com/be5invis/Iosevka"
-                           "/releases/download/v" version
-                           "/ttf-iosevka-term-ss10-" version ".zip"))
-       (sha256
-        (base32 "1pl4z1kcmlkbqxl9g70nj5jisi4889w6q92d56p86m7y35hkdxkh"))))
+      (origin
+        (method url-fetch/zipbomb)
+        (uri (string-append
+               "https://github.com/be5invis/Iosevka"
+               "/releases/download/v"
+               %iosevka-version
+               "/ttf-iosevka-term-ss10-"
+               %iosevka-version
+               ".zip"))
+        (sha256
+          (base32
+            "14qlpd381ns5lz4dghqqcndp7g27x4wd18h3v4ikhh78kcmq0y7k"))))
     (synopsis "Coders' typeface, built from code")
     (description
-     "Iosevka is a slender monospace sans-serif or slab-serif typeface inspired
-by Pragmata Pro, M+, and PF DIN Mono, designed to be the ideal font for
-programming.  Iosevka is completely generated from its source code.")
-    (license (list silofl1.1    ;build artifacts (i.e., the fonts)
-                   bsd-3))))    ;supporting code
+      "Iosevka is a slender monospace sans-serif or slab-serif typeface inspired\nby Pragmata Pro, M+, and PF DIN Mono, designed to be the ideal font for\nprogramming.  Iosevka is completely generated from its source code.")
+    (license (list silofl1.1 bsd-3))))
+;supporting code
