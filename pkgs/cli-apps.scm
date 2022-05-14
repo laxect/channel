@@ -3,6 +3,8 @@
   #:use-module
   ((guix licenses) #:prefix license:)
   #:use-module
+  (guix build-system copy)
+  #:use-module
   (guix build-system cargo)
   #:use-module
   (guix download)
@@ -32,9 +34,7 @@
         (method url-fetch)
         (uri (crate-uri "anki-status" version))
         (file-name (string-append name "-" version ".tar.gz"))
-        (sha256
-          (base32
-            "0n152zg4h65liwbp6nd7mdwql4cgn4sw9wxn2w6qjnqq268aafld"))))
+        (sha256 (base32 "0n152zg4h65liwbp6nd7mdwql4cgn4sw9wxn2w6qjnqq268aafld"))))
     (build-system cargo-build-system)
     (inputs (list openssl))
     (arguments
@@ -47,3 +47,24 @@
     (description "Anki 2.1.x status bar plugin")
     (license license:expat)))
 
+; Binary package
+(define-public starship
+  (package
+    (name "starship")
+    (version "1.6.3")
+    (source
+      (origin
+        (method url-fetch/tarbomb)
+        (uri (string-append
+               "https://github.com/starship/starship/releases/download/v"
+               version
+               "/starship-x86_64-unknown-linux-musl.tar.gz"))
+        (sha256 (base32 "1xcrzhhpqma1rr8cjgc4qg3mh19c3i5h9v2b3w1w0nchc8sgry2h"))))
+    (build-system copy-build-system)
+    (arguments '(#:install-plan '(("starship" "bin/"))))
+    (home-page "https://starship.rs")
+    (synopsis
+      "The minimal, blazing-fast, and infinitely customizable prompt for any shell!")
+    (description
+      "The minimal, blazing-fast, and infinitely customizable prompt for any shell!")
+    (license license:isc)))
