@@ -51,7 +51,7 @@
 (define-public starship
   (package
     (name "starship")
-    (version "1.7.1")
+    (version "1.9.1")
     (source
       (origin
         (method url-fetch/tarbomb)
@@ -59,7 +59,7 @@
                "https://github.com/starship/starship/releases/download/v"
                version
                "/starship-x86_64-unknown-linux-musl.tar.gz"))
-        (sha256 (base32 "063d6hk1hg28hbm3b5s3v1vw0hqdpi8n25vd50yz9537l08ncdhv"))))
+        (sha256 (base32 "03bsfrb74axj5l79mbgf88y3cnv1i0wnx3n01vbgzxpqh4xd7z4c"))))
     (build-system copy-build-system)
     (arguments '(#:install-plan '(("starship" "bin/"))))
     (home-page "https://starship.rs")
