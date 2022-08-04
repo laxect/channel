@@ -32,7 +32,7 @@
     (source
       (origin
         (method url-fetch)
-        (uri (crate-uri "anki-status" version))
+        (uri (crate-uri name version))
         (file-name (string-append name "-" version ".tar.gz"))
         (sha256 (base32 "0n152zg4h65liwbp6nd7mdwql4cgn4sw9wxn2w6qjnqq268aafld"))))
     (build-system cargo-build-system)
@@ -46,6 +46,27 @@
     (synopsis "Anki 2.1.x status bar plugin")
     (description "Anki 2.1.x status bar plugin")
     (license license:expat)))
+
+(define-public shimasen-0.2
+  (package
+    (name "shimasen")
+    (version "0.2.0")
+    (source
+      (origin
+        (method url-fetch)
+        (uri (crate-uri name version))
+        (file-name (string-append name "-" version ".tar.gz"))
+        (sha256 (base32 "1qji23dnv8z31q793z70yi1wcib4kk97aq9hrypkdl2imyikq3ij"))))
+    (build-system cargo-build-system)
+    (arguments
+      `(#:cargo-inputs
+        (("rust-reqwest" ,rust-anyhow-1)
+         ("rust-serde" ,rust-base64-0.13)
+         ("rust-time" ,rust-regex-1))))
+    (home-page "")
+    (synopsis "Tool to convert CCB bill mail to beancount format")
+    (description "Tool to convert CCB bill mail to beancount format")
+    (license license:gpl3)))
 
 ; Binary package
 (define-public starship
