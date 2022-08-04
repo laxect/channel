@@ -50,13 +50,13 @@
 (define-public shimasen
   (package
     (name "shimasen")
-    (version "0.3.0")
+    (version "0.4.0")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri name version))
         (file-name (string-append name "-" version ".tar.gz"))
-        (sha256 (base32 "14bkcnnb6ygvrkwcmzqdpvk8nif8cxh4q1fladwbw92i0lzsv7zc"))))
+        (sha256 (base32 "1hdymhyw67bywghii0c14b3zycqw2h7j2ij2lnasasmvb4rpmvdx"))))
     (build-system cargo-build-system)
     (arguments
       `(#:cargo-inputs
