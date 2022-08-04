@@ -25,7 +25,7 @@
   #:use-module
   (gnu packages rust))
 
-(define-public anki-status-0.2
+(define-public anki-status
   (package
     (name "anki-status")
     (version "0.2.3")
@@ -47,16 +47,16 @@
     (description "Anki 2.1.x status bar plugin")
     (license license:expat)))
 
-(define-public shimasen-0.2
+(define-public shimasen
   (package
     (name "shimasen")
-    (version "0.2.0")
+    (version "0.3.0")
     (source
       (origin
         (method url-fetch)
         (uri (crate-uri name version))
         (file-name (string-append name "-" version ".tar.gz"))
-        (sha256 (base32 "1qji23dnv8z31q793z70yi1wcib4kk97aq9hrypkdl2imyikq3ij"))))
+        (sha256 (base32 "14bkcnnb6ygvrkwcmzqdpvk8nif8cxh4q1fladwbw92i0lzsv7zc"))))
     (build-system cargo-build-system)
     (arguments
       `(#:cargo-inputs
