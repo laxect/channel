@@ -60,10 +60,10 @@
     (build-system cargo-build-system)
     (arguments
       `(#:cargo-inputs
-        (("rust-reqwest" ,rust-anyhow-1)
-         ("rust-serde" ,rust-base64-0.13)
-         ("rust-time" ,rust-regex-1))))
-    (home-page "")
+        (("rust-anyhow" ,rust-anyhow-1)
+         ("rust-base64" ,rust-base64-0.13)
+         ("rust-regex" ,rust-regex-1))))
+    (home-page "https://git.sr.ht/~fubuki/shimasen")
     (synopsis "Tool to convert CCB bill mail to beancount format")
     (description "Tool to convert CCB bill mail to beancount format")
     (license license:gpl3)))
