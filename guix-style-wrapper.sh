@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-T=/tmp/`date -Iseconds -u`.scm
+T=/tmp/`date +%M%S%N -u`.scm
 cp "$@" $T
 guix style -f $T
 cat $T
