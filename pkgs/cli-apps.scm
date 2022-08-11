@@ -11,7 +11,8 @@
   #:use-module (gnu packages tls)
   #:use-module (gnu packages crates-io)
   #:use-module (gnu packages crates-graphics)
-  #:use-module (gnu packages rust))
+  #:use-module (gnu packages rust)
+  #:use-module (pkgs crates-io))
 
 (define-public anki-status
   (package
@@ -30,9 +31,32 @@
      `(#:cargo-inputs (("rust-reqwest" ,rust-reqwest-0.11)
                        ("rust-serde" ,rust-serde-1)
                        ("rust-time" ,rust-time-0.3))))
-    (home-page "")
+    (home-page "https://git.sr.ht/~fubuki/anki-status")
     (synopsis "Anki 2.1.x status bar plugin")
     (description "Anki 2.1.x status bar plugin")
+    (license license:expat)))
+
+(define-public kyou
+  (package
+    (name "kyou")
+    (version "0.2.1")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/shimakaze-system/kyou/archive/v"
+                    version ".tar.gz"))
+              (sha256
+               (base32
+                "1s222h2rjrsi45i16jp7f419ylwzlx1lsi76545dms7imxw884dg"))))
+    (build-system cargo-build-system)
+    (inputs (list openssl))
+    (arguments
+     `(#:cargo-inputs (("rust-chinese-number" ,rust-chinese-number-0.6)
+                       ("rust-color-eyre" ,rust-color-eyre-0.6)
+                       ("rust-time" ,rust-time-0.3))))
+    (home-page "https://github.com/shimakaze-system/kyou")
+    (synopsis "Waybar calender plugin")
+    (description "Waybar calender plugin")
     (license license:expat)))
 
 (define-public shimasen

@@ -3,8 +3,7 @@
   "exec": {
     "associations": "**/*.scm",
     "timeout": 30,
-    "guix_style": "./guix-style-wrapper.sh {{file_path}}",
-    "guix_style.stdin": false,
+    "guix_style": "./guix-style-wrapper.sh",
     "guix_style.associations": "**/*.scm"
   },
   "json": {},
