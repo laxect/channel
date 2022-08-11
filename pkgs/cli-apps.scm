@@ -88,18 +88,18 @@
 (define-public shimasen
   (package
     (name "shimasen")
-    (version "0.4.0")
+    (version "0.5.0")
     (source (origin
               (method url-fetch)
               (uri (crate-uri name version))
               (file-name (string-append name "-" version ".tar.gz"))
               (sha256
                (base32
-                "1hdymhyw67bywghii0c14b3zycqw2h7j2ij2lnasasmvb4rpmvdx"))))
+                "1apklr155s0yc95s8vw9bcv7135lga3h2j84lwka5xs94q5zs4al"))))
     (build-system cargo-build-system)
     (arguments
-     `(#:cargo-inputs (("rust-anyhow" ,rust-anyhow-1)
-                       ("rust-base64" ,rust-base64-0.13)
+     `(#:cargo-inputs (("rust-color-eyre" ,rust-color-eyre-0.6)
+                       ("rust-mail-parser" ,rust-mail-parser-0.5)
                        ("rust-regex" ,rust-regex-1))))
     (home-page "https://git.sr.ht/~fubuki/shimasen")
     (synopsis "Tool to convert CCB bill mail to beancount format")

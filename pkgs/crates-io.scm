@@ -197,3 +197,24 @@ and well formatted error reports for all kinds of errors.")
      "Convert primitive numbers to Chinese numbers, or parse Chinese numbers to
 primitive numbers.")
     (license license:expat)))
+
+(define-public rust-mail-parser-0.5
+  (package
+    (name "rust-mail-parser")
+    (version "0.5.0")
+    (source (origin
+              (method url-fetch)
+              (uri (crate-uri "mail-parser" version))
+              (file-name (string-append name "-" version ".tar.gz"))
+              (sha256
+               (base32
+                "1dylbm63mr74nx81m3ks3mhz706i5zqrjd531j756q0krplyj98y"))))
+    (build-system cargo-build-system)
+    (arguments
+     `(#:skip-build? #t
+       #:cargo-inputs (("rust-encoding-rs" ,rust-encoding-rs-0.8)
+                       ("rust-serde" ,rust-serde-1))))
+    (home-page "https://github.com/stalwartlabs/mail-parser")
+    (synopsis "Fast and robust e-mail parsing library for Rust")
+    (description "Fast and robust e-mail parsing library for Rust")
+    (license (list license:asl2.0 license:expat))))
