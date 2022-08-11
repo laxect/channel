@@ -59,6 +59,32 @@
     (description "Waybar calender plugin")
     (license license:expat)))
 
+(define-public unlocker
+  (package
+    (name "unlocker")
+    (version "0.1.0")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/laxect/unlocker/archive/v" version
+                    ".tar.gz"))
+              (sha256
+               (base32
+                "022m6y78bxdyd5z8xw1sg99715cn6jkjk3411k8f98pngq9k2l2w"))))
+    (build-system cargo-build-system)
+    (inputs (list openssl))
+    (arguments
+     `(#:cargo-inputs (("rust-dirs" ,rust-dirs-3)
+                       ("rust-color-eyre" ,rust-color-eyre-0.6)
+                       ("rust-serde" ,rust-serde-1)
+                       ("rust-toml" ,rust-toml-0.5)
+                       ("rust-tracing" ,rust-tracing-0.1)
+                       ("rust-tracing-subscsriber" ,rust-tracing-subscriber-0.3))))
+    (home-page "https://github.com/laxect/unlocker")
+    (synopsis "Waybar calender plugin")
+    (description "Waybar calender plugin")
+    (license license:expat)))
+
 (define-public shimasen
   (package
     (name "shimasen")
