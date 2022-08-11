@@ -45,6 +45,7 @@
               (uri (string-append
                     "https://github.com/shimakaze-system/kyou/archive/v"
                     version ".tar.gz"))
+              (file-name (string-append name "-" version ".tar.gz"))
               (sha256
                (base32
                 "1s222h2rjrsi45i16jp7f419ylwzlx1lsi76545dms7imxw884dg"))))
@@ -68,6 +69,7 @@
               (uri (string-append
                     "https://github.com/laxect/unlocker/archive/v" version
                     ".tar.gz"))
+              (file-name (string-append name "-" version ".tar.gz"))
               (sha256
                (base32
                 "022m6y78bxdyd5z8xw1sg99715cn6jkjk3411k8f98pngq9k2l2w"))))
