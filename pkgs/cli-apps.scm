@@ -9,9 +9,12 @@
   #:use-module (guix utils)
   #:use-module (gnu packages)
   #:use-module (gnu packages tls)
-  #:use-module (gnu packages crates-io)
-  #:use-module (gnu packages crates-graphics)
+  #:use-module (gnu packages glib)
   #:use-module (gnu packages rust)
+  #:use-module (gnu packages crates-io)
+  #:use-module (gnu packages compression)
+  #:use-module (gnu packages crates-graphics)
+  #:use-module (gnu packages pkg-config)
   #:use-module (pkgs crates-io))
 
 (define-public anki-status
@@ -34,6 +37,68 @@
     (home-page "https://git.sr.ht/~fubuki/anki-status")
     (synopsis "Anki 2.1.x status bar plugin")
     (description "Anki 2.1.x status bar plugin")
+    (license license:expat)))
+
+(define-public changeup
+  (package
+    (name "changeup")
+    (version "0.2.3")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/laxect/changeup/releases/download/"
+                    version
+                    "/"
+                    name
+                    "-"
+                    version
+                    ".zip"))
+              (file-name (string-append name "-" version ".zip"))
+              (sha256
+               (base32
+                "076fwhkz8k5avvvgwplii7fwq1aqlywzixh3zrs0bbf43vhqhxsv"))))
+    (build-system cargo-build-system)
+    (native-inputs (list dbus unzip pkg-config))
+    (arguments
+     `(#:install-source? #f
+       #:phases (modify-phases %standard-phases
+                  (delete 'configure)
+                  (replace 'install
+                    (lambda* (#:key inputs outputs features #:allow-other-keys)
+                      "Install a given Cargo package."
+                      (let* ((out (assoc-ref outputs "out"))
+                             (systemd-user (string-append out
+                                            "/lib/systemd/user/"))
+                             (dbus-service (string-append out
+                                            "/share/dbus-1/services/")))
+                        (chdir "..")
+                        (mkdir-p out)
+                        (mkdir-p systemd-user)
+                        (mkdir-p dbus-service)
+                        (setenv "CARGO_TARGET_DIR" "./target")
+                        (invoke "cargo"
+                                "install"
+                                "--no-track"
+                                "--path"
+                                "."
+                                "--root"
+                                out
+                                "--features"
+                                (string-join features))
+                        (substitute* '("changeup.service"
+                                       "moe.gyara.changeup.service")
+                          (("/usr/bin/")
+                           (string-append out "/bin/")))
+                        (copy-file "changeup.service"
+                                   (string-append systemd-user
+                                                  "changeup.service"))
+                        (copy-file "moe.gyara.changeup.service"
+                                   (string-append dbus-service
+                                    "moe.gyara.changeup.service"))
+                        #t))))))
+    (home-page "https://git.sr.ht/~fubuki/changeup")
+    (synopsis "Wake up!")
+    (description "Sway helper daemon")
     (license license:expat)))
 
 (define-public kyou
