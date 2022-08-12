@@ -1,15 +1,15 @@
 {
   "incremental": true,
   "exec": {
-    "associations": "**/*.scm",
+    "associations": "**/*.{scm,list}",
     "timeout": 30,
     "guix_style": "./guix-style-wrapper.sh",
-    "guix_style.associations": "**/*.scm"
+    "guix_style.associations": "**/*.{scm,list}"
   },
   "json": {},
   "markdown": {},
   "includes": [
-    "**/*.{json,md,scm}"
+    "**/*.{json,md,scm,list}"
   ],
   "excludes": [
     "**/node_modules",
