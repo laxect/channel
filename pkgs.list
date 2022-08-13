@@ -1,6 +1,6 @@
 (use-modules (gnu packages))
 
 (define list
-  '("anki-status" "kyou" "unlocker" "shimasen" "changeup"))
+  '("anki-status" "kyou" "unlocker" "shimasen" "changeup" "diva-livomo"))
 
 (specifications->manifest list)

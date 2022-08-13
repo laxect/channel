@@ -11,10 +11,11 @@
   #:use-module (gnu packages tls)
   #:use-module (gnu packages glib)
   #:use-module (gnu packages rust)
+  #:use-module (gnu packages gnome)
   #:use-module (gnu packages crates-io)
+  #:use-module (gnu packages pkg-config)
   #:use-module (gnu packages compression)
   #:use-module (gnu packages crates-graphics)
-  #:use-module (gnu packages pkg-config)
   #:use-module (pkgs crates-io))
 
 (define-public anki-status
@@ -89,6 +90,58 @@
     (home-page "https://git.sr.ht/~fubuki/changeup")
     (synopsis "Wake up!")
     (description "Sway helper daemon")
+    (license license:expat)))
+
+(define-public diva-livomo
+  (package
+    (name "diva-livomo")
+    (version "0.3.2")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/laxect/diva-livomo/releases/download/"
+                    version
+                    "/"
+                    name
+                    "-"
+                    version
+                    ".zip"))
+              (file-name (string-append name "-" version ".zip"))
+              (sha256
+               (base32
+                "0phgawcz1afsdiai2sgzi2kipjm1yf6rdrilii5x3ng2ynflcyjl"))))
+    (build-system cargo-build-system)
+    (inputs (list openssl libsecret))
+    (native-inputs (list unzip pkg-config))
+    (arguments
+     `(#:install-source? #f
+       #:phases (modify-phases %standard-phases
+                  (replace 'configure
+                    (lambda* (#:key inputs #:allow-other-keys)
+                      (setenv "RUSTFLAGS" "--cap-lints allow")
+                      (setenv "CC"
+                              (string-append (assoc-ref inputs "gcc")
+                                             "/bin/gcc"))
+                      (setenv "LIBGIT2_SYS_USE_PKG_CONFIG" "1")
+                      (setenv "LIBSSH2_SYS_USE_PKG_CONFIG" "1")
+                      (setenv "OPENSSL_DIR"
+                              (assoc-ref inputs "openssl"))
+                      #t))
+                  (add-before 'install 'ch
+                    (lambda _
+                      (chdir "..")))
+                  (add-after 'install 'install-completion
+                    (lambda* (#:key outputs #:allow-other-keys)
+                      "Install a given Cargo package."
+                      (let* ((out (assoc-ref outputs "out"))
+                             (zsh (string-append out
+                                   "/usr/share/zsh/site-functions/")))
+                        (mkdir-p zsh)
+                        (copy-file "_dival"
+                                   (string-append zsh "_dival")) #t))))))
+    (home-page "https://github.com/laxect/diva-livomo/")
+    (synopsis "Diva Līvõmō")
+    (description "Note to markdown")
     (license license:expat)))
 
 (define-public kyou
