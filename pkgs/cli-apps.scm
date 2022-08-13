@@ -158,7 +158,6 @@
                (base32
                 "1s222h2rjrsi45i16jp7f419ylwzlx1lsi76545dms7imxw884dg"))))
     (build-system cargo-build-system)
-    (inputs (list openssl))
     (arguments
      `(#:cargo-inputs (("rust-chinese-number" ,rust-chinese-number-0.6)
                        ("rust-color-eyre" ,rust-color-eyre-0.6)
@@ -182,7 +181,6 @@
                (base32
                 "022m6y78bxdyd5z8xw1sg99715cn6jkjk3411k8f98pngq9k2l2w"))))
     (build-system cargo-build-system)
-    (inputs (list openssl))
     (arguments
      `(#:cargo-inputs (("rust-dirs" ,rust-dirs-3)
                        ("rust-color-eyre" ,rust-color-eyre-0.6)
