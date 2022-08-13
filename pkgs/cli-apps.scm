@@ -135,7 +135,7 @@
                       "Install a given Cargo package."
                       (let* ((out (assoc-ref outputs "out"))
                              (zsh (string-append out
-                                   "/usr/share/zsh/site-functions/")))
+                                                 "/share/zsh/site-functions/")))
                         (mkdir-p zsh)
                         (copy-file "_dival"
                                    (string-append zsh "_dival")) #t))))))
