@@ -63,39 +63,29 @@
      `(#:install-source? #f
        #:phases (modify-phases %standard-phases
                   (delete 'configure)
-                  (replace 'install
-                    (lambda* (#:key inputs outputs features #:allow-other-keys)
+                  (add-before 'install 'ch
+                    (lambda _
+                      (chdir "..")))
+                  (add-after 'install 'install-service
+                    (lambda* (#:key outputs #:allow-other-keys)
                       "Install a given Cargo package."
                       (let* ((out (assoc-ref outputs "out"))
                              (systemd-user (string-append out
                                             "/lib/systemd/user/"))
                              (dbus-service (string-append out
                                             "/share/dbus-1/services/")))
-                        (chdir "..")
-                        (mkdir-p out)
-                        (mkdir-p systemd-user)
-                        (mkdir-p dbus-service)
-                        (setenv "CARGO_TARGET_DIR" "./target")
-                        (invoke "cargo"
-                                "install"
-                                "--no-track"
-                                "--path"
-                                "."
-                                "--root"
-                                out
-                                "--features"
-                                (string-join features))
+                        (for-each mkdir-p
+                                  (list out systemd-user dbus-service))
                         (substitute* '("changeup.service"
                                        "moe.gyara.changeup.service")
-                          (("/usr/bin/")
-                           (string-append out "/bin/")))
+                          (("/usr")
+                           out))
                         (copy-file "changeup.service"
                                    (string-append systemd-user
                                                   "changeup.service"))
                         (copy-file "moe.gyara.changeup.service"
                                    (string-append dbus-service
-                                    "moe.gyara.changeup.service"))
-                        #t))))))
+                                    "moe.gyara.changeup.service")) #t))))))
     (home-page "https://git.sr.ht/~fubuki/changeup")
     (synopsis "Wake up!")
     (description "Sway helper daemon")
