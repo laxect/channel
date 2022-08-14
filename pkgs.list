@@ -3,6 +3,7 @@
 (define list
   '("anki-status" "changeup"
     "diva-livomo"
+    "dunst-onaction"
     "hyouka"
     "kyou"
     "unlocker"
