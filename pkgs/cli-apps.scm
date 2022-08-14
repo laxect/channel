@@ -170,8 +170,14 @@
                   (delete 'configure)
                   (add-before 'install 'ch
                     (lambda _
-                      (chdir ".."))))))
-
+                      (chdir "..")))
+                  (add-after 'install 'install-completion
+                    (lambda* (#:key outputs #:allow-other-keys)
+                      "Install Completion."
+                      (let* ((out (assoc-ref outputs "out"))
+                             (zsh (string-append out
+                                                 "/share/zsh/site-functions/")))
+                        (install-file "_hyouka" zsh)) #t)))))
     (home-page "https://github.com/laxect/hyouka/")
     (synopsis "Blog manager")
     (description "Create blog page and post them in terminal")
