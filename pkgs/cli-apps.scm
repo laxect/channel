@@ -23,12 +23,14 @@
     (name "anki-status")
     (version "0.2.3")
     (source (origin
-              (method url-fetch)
-              (uri (crate-uri name version))
-              (file-name (string-append name "-" version ".tar.gz"))
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://git.sr.ht/~fubuki/anki-status")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
               (sha256
                (base32
-                "0n152zg4h65liwbp6nd7mdwql4cgn4sw9wxn2w6qjnqq268aafld"))))
+                "1scgrrwyhw1gzwrybbvn91i7zm60dbmhnl18pxxa452dg4gxf128"))))
     (build-system cargo-build-system)
     (inputs (list openssl))
     (arguments
@@ -282,12 +284,14 @@
     (name "shimasen")
     (version "0.5.0")
     (source (origin
-              (method url-fetch)
-              (uri (crate-uri name version))
-              (file-name (string-append name "-" version ".tar.gz"))
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://git.sr.ht/~fubuki/shimasen")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
               (sha256
                (base32
-                "1apklr155s0yc95s8vw9bcv7135lga3h2j84lwka5xs94q5zs4al"))))
+                "0sd5vsnfisj16w8rb0m4q0w3vwsvi9ghg7wjg41v7hj19fsxyldh"))))
     (build-system cargo-build-system)
     (arguments
      `(#:cargo-inputs (("rust-color-eyre" ,rust-color-eyre-0.6)
