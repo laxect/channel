@@ -151,7 +151,7 @@
   (package
     (inherit dunst)
     (name "dunst-onaction")
-    (version "190.0.0")
+    (version "190.0.1")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -160,7 +160,20 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "134s4pbf81ga5xv2k53wj0wyw6zn4frcbqzazzw6dda3b0118769"))))))
+                "1lyi3m2inijgmkmpa2ndnzr17l1bhqqgz7pppd9cd0qn4xwf8ika"))))
+    (arguments
+     `(#:tests? #f ;no check target
+       #:make-flags (list (string-append "CC="
+                                         ,(cc-for-target))
+                          (string-append "PREFIX=" %output)
+                          (string-append "SYSCONFDIR=" %output "/etc")
+                          (string-append "SERVICEDIR_DBUS=" %output
+                                         "/share/dbus-1/services")
+                          (string-append "SERVICEDIR_SYSTEMD=" %output
+                                         "/lib/systemd/user")
+                          "dunstify")
+       #:phases (modify-phases %standard-phases
+                  (delete 'configure))))))
 
 (define-public hyouka
   (package
