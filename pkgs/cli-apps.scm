@@ -320,3 +320,24 @@
     (description
      "The minimal, blazing-fast, and infinitely customizable prompt for any shell!")
     (license license:isc)))
+
+(define-public license-generator
+  (package
+    (name "license-generator")
+    (version "0.8.1")
+    (source (origin
+              (method url-fetch)
+              (uri (crate-uri "license-generator" version))
+              (file-name (string-append name "-" version ".tar.gz"))
+              (sha256
+               (base32
+                "1n296rr78439b9cmv87ppblxwyskzyqqcb3fmj3a5qlw7cbn46vd"))))
+    (build-system cargo-build-system)
+    (arguments
+     `(#:cargo-inputs (("rust-chrono" ,rust-chrono-0.4)
+                       ("rust-structopt" ,rust-structopt-0.2))))
+    (home-page "https://github.com/azu/license-generator")
+    (synopsis "A Command line tool that generate `LICENSE` file.")
+    (description
+     "This package provides a Command line tool that generate `LICENSE` file.")
+    (license license:expat)))
