@@ -69,7 +69,7 @@
                       (chdir "..")))
                   (add-after 'install 'install-service
                     (lambda* (#:key outputs #:allow-other-keys)
-                      "Install a given Cargo package."
+                      "Install Services."
                       (let* ((out (assoc-ref outputs "out"))
                              (systemd-user (string-append out
                                             "/lib/systemd/user/"))
@@ -132,7 +132,7 @@
                       (chdir "..")))
                   (add-after 'install 'install-completion
                     (lambda* (#:key outputs #:allow-other-keys)
-                      "Install a given Cargo package."
+                      "Install Completion."
                       (let* ((out (assoc-ref outputs "out"))
                              (zsh (string-append out
                                                  "/share/zsh/site-functions/")))
@@ -142,6 +142,39 @@
     (home-page "https://github.com/laxect/diva-livomo/")
     (synopsis "Diva Līvõmō")
     (description "Note to markdown")
+    (license license:expat)))
+
+(define-public hyouka
+  (package
+    (name "hyouka")
+    (version "0.1.0")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/laxect/hyouka/releases/download/"
+                    version
+                    "/"
+                    name
+                    "-"
+                    version
+                    ".zip"))
+              (file-name (string-append name "-" version ".zip"))
+              (sha256
+               (base32
+                "1c4jj5l1ry8bfyc77gh0cmikvwv0wddgcna09mpxf50p39fjv9nn"))))
+    (build-system cargo-build-system)
+    (native-inputs (list unzip pkg-config))
+    (arguments
+     `(#:install-source? #f
+       #:phases (modify-phases %standard-phases
+                  (delete 'configure)
+                  (add-before 'install 'ch
+                    (lambda _
+                      (chdir ".."))))))
+
+    (home-page "https://github.com/laxect/hyouka/")
+    (synopsis "Blog manager")
+    (description "Create blog page and post them in terminal")
     (license license:expat)))
 
 (define-public kyou
@@ -191,6 +224,51 @@
     (home-page "https://github.com/laxect/unlocker")
     (synopsis "Waybar calender plugin")
     (description "Waybar calender plugin")
+    (license license:expat)))
+
+(define-public whisper
+  (package
+    (name "whisper")
+    (version "0.2.1")
+    (source (origin
+              (method url-fetch)
+              (uri (string-append
+                    "https://github.com/laxect/whisper/releases/download/"
+                    version
+                    "/"
+                    name
+                    "-"
+                    version
+                    ".zip"))
+              (file-name (string-append name "-" version ".zip"))
+              (sha256
+               (base32
+                "0mhfgia3k109hngs9bbzqn1kghmynahgi9lp5v4i02kjcyyfy6f3"))))
+    (build-system cargo-build-system)
+    (inputs (list libsecret))
+    (native-inputs (list unzip pkg-config glib))
+    (arguments
+     `(#:install-source? #f
+       #:phases (modify-phases %standard-phases
+                  (replace 'configure
+                    (lambda* (#:key inputs #:allow-other-keys)
+                      (setenv "RUSTFLAGS" "--cap-lints allow")
+                      (setenv "CC"
+                              (string-append (assoc-ref inputs "gcc")
+                                             "/bin/gcc")) #t))
+                  (add-before 'install 'ch
+                    (lambda _
+                      (chdir "..")))
+                  (add-after 'install 'install-wrapper
+                    (lambda* (#:key outputs #:allow-other-keys)
+                      "Install Wrapper shell."
+                      (let* ((out (assoc-ref outputs "out")))
+                        (copy-file "contrib/bemenu.sh"
+                                   (string-append out "/bin/whisper-bemenu"))
+                        #t))))))
+    (home-page "https://github.com/laxect/whisper/")
+    (synopsis "Libsecret bemenu link")
+    (description "Bemenu wrapper for libsecret")
     (license license:expat)))
 
 (define-public shimasen
