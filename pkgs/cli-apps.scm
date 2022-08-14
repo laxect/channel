@@ -11,6 +11,7 @@
   #:use-module (gnu packages tls)
   #:use-module (gnu packages glib)
   #:use-module (gnu packages rust)
+  #:use-module (gnu packages dunst)
   #:use-module (gnu packages gnome)
   #:use-module (gnu packages crates-io)
   #:use-module (gnu packages pkg-config)
@@ -145,6 +146,21 @@
     (synopsis "Diva Līvõmō")
     (description "Note to markdown")
     (license license:expat)))
+
+(define-public dunst-onaction
+  (package
+    (inherit dunst)
+    (name "dunst-onaction")
+    (version "190.0.0")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://git.sr.ht/~fubuki/dunst")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "134s4pbf81ga5xv2k53wj0wyw6zn4frcbqzazzw6dda3b0118769"))))))
 
 (define-public hyouka
   (package
