@@ -22,7 +22,7 @@
 (define-public acc-time
   (package
     (name "acc-time")
-    (version "0.1.0")
+    (version "0.2.0")
     (source (origin
               (method git-fetch)
               (uri (git-reference
@@ -31,7 +31,7 @@
               (file-name (git-file-name name version))
               (sha256
                (base32
-                "0wzis6npyl199n6nsgja130yrpjcy284jnlj2qzncvryawv4agn5"))))
+                "18c9n9vwwv0l888k5hk8d0hg5p6arqxayjajxfdqid1s1pq4zdia"))))
     (build-system cargo-build-system)
     (inputs (list openssl))
     (arguments
