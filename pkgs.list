@@ -1,7 +1,8 @@
 (use-modules (gnu packages))
 
 (define list
-  '("anki-status" "changeup"
+  '("anki-status" "acc-time"
+    "changeup"
     "diva-livomo"
     "dunst-onaction"
     "hyouka"

@@ -19,6 +19,29 @@
   #:use-module (gnu packages crates-graphics)
   #:use-module (pkgs crates-io))
 
+(define-public acc-time
+  (package
+    (name "acc-time")
+    (version "0.1.0")
+    (source (origin
+              (method git-fetch)
+              (uri (git-reference
+                    (url "https://git.sr.ht/~fubuki/acc_time")
+                    (commit (string-append "v" version))))
+              (file-name (git-file-name name version))
+              (sha256
+               (base32
+                "0wzis6npyl199n6nsgja130yrpjcy284jnlj2qzncvryawv4agn5"))))
+    (build-system cargo-build-system)
+    (inputs (list openssl))
+    (arguments
+     `(#:cargo-inputs (("rust-color-eyre" ,rust-color-eyre-0.6)
+                       ("rust-time" ,rust-time-0.3))))
+    (home-page "https://git.sr.ht/~fubuki/acc_time")
+    (synopsis "Acc time for using in xxx-bar")
+    (description "Acc time for using in xxx-bar")
+    (license license:expat)))
+
 (define-public anki-status
   (package
     (name "anki-status")
@@ -162,7 +185,7 @@
                (base32
                 "1lyi3m2inijgmkmpa2ndnzr17l1bhqqgz7pppd9cd0qn4xwf8ika"))))
     (arguments
-     `(#:tests? #f ;no check target
+     `(#:tests? #f
        #:make-flags (list (string-append "CC="
                                          ,(cc-for-target))
                           (string-append "PREFIX=" %output)
