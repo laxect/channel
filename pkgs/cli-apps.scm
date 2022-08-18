@@ -148,11 +148,8 @@
                       (setenv "CC"
                               (string-append (assoc-ref inputs "gcc")
                                              "/bin/gcc"))
-                      (setenv "LIBGIT2_SYS_USE_PKG_CONFIG" "1")
-                      (setenv "LIBSSH2_SYS_USE_PKG_CONFIG" "1")
                       (setenv "OPENSSL_DIR"
-                              (assoc-ref inputs "openssl"))
-                      #t))
+                              (assoc-ref inputs "openssl")) #t))
                   (add-before 'install 'ch
                     (lambda _
                       (chdir "..")))
@@ -162,9 +159,7 @@
                       (let* ((out (assoc-ref outputs "out"))
                              (zsh (string-append out
                                                  "/share/zsh/site-functions/")))
-                        (mkdir-p zsh)
-                        (copy-file "_dival"
-                                   (string-append zsh "_dival")) #t))))))
+                        (install-file "_dival" zsh)) #t)))))
     (home-page "https://github.com/laxect/diva-livomo/")
     (synopsis "Diva Līvõmō")
     (description "Note to markdown")
